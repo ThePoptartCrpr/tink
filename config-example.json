@@ -1,0 +1,7 @@
+{
+	"prefix" : "!",
+	"token" : "Your bot token - SECRET",
+	"passes" : 1,
+	"botsDiscordPwToken" : "Your bots.discord.pw token",
+	"botsDiscordPwUser" : "Your bots.discord.pw user"
+}
