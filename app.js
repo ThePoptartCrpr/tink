@@ -52,13 +52,7 @@ client.on('reconnecting', () => {
   console.log(`${new Date()} Tink reconnecting.`);
 });
 
-/*client.on('roleDelete', role => {
-  let guild = role.guild;
-  guild.defaultChannel.sendMessage(`A role called ${role.name} has been deleted`);
-});*/
-
 let prefix = "!";
-//let nameLength = "Tink, ";
 
 var queue = {};
 
@@ -67,13 +61,6 @@ var totalCommands = 0;
 let musicplaying = "false";
 
 var musicjoin = [];
-
-
-//var response = null;
-
-//let defaultPrefix = "!";
-
-//const messageVar = [];
 
 client.on("guildMemberAdd", member => {
 	if(member.guild.id === "110373943822540800") return;
@@ -84,25 +71,14 @@ client.on("guildMemberAdd", member => {
 
 client.on("guildCreate", (guild, member) => {
 	console.log(`Tink has been added to a new guild: ${guild.name}, owned by ${guild.owner.user.username}`)
-	//if(member.guild.id === "110373943822540800") return;
 	guild.defaultChannel.sendMessage(`Hello! I am Tink, a multipurpose bot for Discord developed by ThePoptartCrpr.\nFor a full list of commands, type !help!\nNeed help? Want the latest announcements? You can join my support server here: https://discord.gg/ZGS9P9G \nNote that I will not always be online, I am currently manually hosted. If I am not online, just wait a bit!\nCurrent version: ${version}`);
 });
 
 
 client.on('message', (message, guildmember, member, guildchannel, guild) => {
   if(message.author.bot) return;
-	/*if(!message.content.startsWith("Tink, ")) {
-		if(!message.content.startsWith(prefix)) return;
-	}*/
   if(!message.content.startsWith(prefix)) return;
 
-  /*if(message.content.startsWith(prefix)) {
-	  response = "prefix";
-	  console.log(response);
-  } else {
-	  response = "name";
-	  console.log(response);
-  }*/
 	try {
   if(message.guild.id === "110373943822540800") return;
 	} catch(e) {
@@ -110,33 +86,16 @@ client.on('message', (message, guildmember, member, guildchannel, guild) => {
 	}
 
   let command = message.content.split(" ")[0];
-  /*if (response === "name") {
-	  command = command.slice(nameLength.length);
-  } else
-
-  if (response === "prefix") {
-	  command = command.slice(prefix.length);
-  }*/
   command = command.slice(prefix.length);
 
   let timestamp = message.createdAt;
   let restartStamp = client.readyAt;
-  /*let mstart = "!music volume ";
-  let marg = message.content.slice(mstart.length);
-  console.log(marg);*/
 
   let args = message.content.split(" ").slice(1);
   var str = message.content.split(" ").slice(1).join(" ");
   var result = args.join(' ');
 
   totalCommands += 1;
-
-  /*try {
-  console.log(`${timestamp}: !${command} ${args} was used by ${message.author.username}, in server ${message.guild.name}.`);
-  } catch(e) {
-	  console.log(`Error, aborted message! Most likely in a DM`);
-	  //console.log(e);
-  }*/
 
   if(message.channel.type == 'dm') {
     console.log(`${timestamp}: "!${command} ${result}" was used by ${message.author.username}, in a direct message.`);
@@ -150,15 +109,11 @@ client.on('message', (message, guildmember, member, guildchannel, guild) => {
 
   // MUSIC
 
-// let voiceConnected = [];
-// voiceConnected = "false";
-
   const connectVoiceChannel = function() {
     console.log('Connecting to voice channel');
   return new Promise((resolve, reject) => {
   const voiceChannel = message.member.voiceChannel;
   if (!voiceChannel || voiceChannel.type !== 'voice') return musicjoin[message.guild.id] = "false";
-  // message.channel.sendMessage('Joined your voice channel.');
   musicjoin[message.guild.id] = "true";
   voiceChannel.join().then(connection => resolve(connection)).catch(err => reject(err));
 });
@@ -178,13 +133,10 @@ const startMusicPlay = function() {
 
   console.log(queue);
   (function play(song) {
-    //musicplaying = "true";
     console.log(song);
     if (song === undefined) return message.channel.sendMessage('Queue concluded.').then(() => {
       queue[message.guild.id].playing = false;
       message.member.voiceChannel.leave();
-      // voiceConnected[guild.id] = "false";
-      // musicplaying = "false";
     });
     message.channel.sendMessage(`Playing: **${song.title}** \nRequested by: **${song.requester}**`);
     dispatcher = message.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : config.passes });
@@ -227,7 +179,6 @@ const startMusicPlay = function() {
 };
 
   if (command === "music") {
-	  //console.log(queue);
 	  if (message.content.startsWith(prefix + "music play")) {
 
       try {
@@ -238,56 +189,6 @@ const startMusicPlay = function() {
     } catch(e) {
     }
 
-		/*if (queue[message.guild.id] === undefined) return message.channel.sendMessage(`Add some songs to the queue first with ${prefix}music add.`);
-		//if (!message.guild.voiceConnection) return commands.join(message).then(() => commands.play(message));
-		if (queue[message.guild.id].playing) return message.channel.sendMessage('I\'m already playing music!');
-		let dispatcher;
-		queue[message.guild.id].playing = true;
-
-		console.log(queue);
-		(function play(song) {
-			//musicplaying = "true";
-			console.log(song);
-			if (song === undefined) return message.channel.sendMessage('Queue concluded.').then(() => {
-				queue[message.guild.id].playing = false;
-				message.member.voiceChannel.leave();
-				// musicplaying = "false";
-			});
-			message.channel.sendMessage(`Playing: **${song.title}** \nRequested by: **${song.requester}**`);
-			dispatcher = message.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : config.passes });
-			let collector = message.channel.createCollector(m => m);
-			collector.on('message', m => {
-				if (m.content.startsWith(prefix + 'music pause')) {
-					message.channel.sendMessage('Music paused.').then(() => {dispatcher.pause();});
-				} else if (m.content.startsWith(prefix + 'music resume')){
-					message.channel.sendMessage('Music resumed.').then(() => {dispatcher.resume();});
-				} else if (m.content.startsWith(prefix + 'music skip')){
-					message.channel.sendMessage('Music skipped.').then(() => {dispatcher.end();});
-				} else if (m.content.startsWith(prefix + 'music volume+')){
-					if (Math.round(dispatcher.volume*50) >= 100) return message.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
-					dispatcher.setVolume(Math.min((dispatcher.volume*50 + (2*(m.content.split('+').length-1)))/50,2));
-					message.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
-				} else if (m.content.startsWith(prefix + 'music volume-')){
-					if (Math.round(dispatcher.volume*50) <= 0) return message.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
-					dispatcher.setVolume(Math.max((dispatcher.volume*50 - (2*(m.content.split('-').length-1)))/50,0));
-					message.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
-				} else if (m.content.startsWith(prefix + 'time')){
-					message.channel.sendMessage(`time: ${Math.floor(dispatcher.time / 60000)}:${Math.floor((dispatcher.time % 60000)/1000) <10 ? '0'+Math.floor((dispatcher.time % 60000)/1000) : Math.floor((dispatcher.time % 60000)/1000)}`);
-				}
-			});
-			dispatcher.on('end', () => {
-				collector.stop();
-				queue[message.guild.id].songs.shift();
-				play(queue[message.guild.id].songs[0]);
-			});
-			dispatcher.on('error', (err) => {
-				return message.channel.sendMessage('error: ' + err).then(() => {
-					collector.stop();
-					queue[message.guild.id].songs.shift();
-					play(queue[message.guild.id].songs[0]);
-				});
-			});
-		})(queue[message.guild.id].songs[0]);*/
   } else
 
 	  if (message.content.startsWith(prefix + 'music join')) {
@@ -345,26 +246,6 @@ const startMusicPlay = function() {
 	  message.channel.sendMessage('To add me to your server, click here: http://bit.ly/2funTwG \nYou can join my support server here: https://discord.gg/ZGS9P9G');
   } else
 
-// here is my test config thing
-
-  /* if (command === "setmessage") {
-	  messageVar[message.guild.id] = "message1";
-  } else
-
-  if (command === "setmessage2") {
-	  messageVar[message.guild.id] = "message2";
-  } else
-
-  if (command === "message") {
-	  if(messageVar[message.guild.id] === "message1") {
-		  message.channel.sendMessage('message1');
-	  } else
-
-	  if(messageVar[message.guild.id] === "message2") {
-		  message.channel.sendMessage('message2');
-	  }
-  } else */
-
   if (command === "say") {
 	  message.channel.sendMessage(args.join(" "));
   } else
@@ -399,24 +280,12 @@ const startMusicPlay = function() {
   if (command === "userinfo") {
 	try {
 	let infoUser = message.guild.member(message.mentions.users.first()) || message.member;
-	/*if (args === "") {
-		//message.channel.sendMessage(`Usage of !userinfo:\n!userinfo <@usertag>`);
-		let infoUser = message.member;
-		message.channel.sendMessage(infoUser);
-		//if (infoUser === "null") return;
-	} else {
-		let joinedAt = infoUser.joinedAt;
-		var nickname = infoUser.nickname;
-		let highestRole = infoUser.highestRole;
-	}*/
 	let joinedAt = infoUser.joinedAt;
 	var nickname = infoUser.nickname;
 	let infoUserName = infoUser.user.username;
 	let highestRole = infoUser.highestRole;
-	//console.log(nickname);
 	if (nickname === null) {
 		nickname = "N/A";
-		//console.log(nickname);
 	}
 	message.channel.sendMessage(`Showing info for user ${infoUser} (${infoUserName}).\nJoined at: ${joinedAt}\nNickname: ${nickname}\nHighest Role: ${highestRole}\n`);
 	} catch(e) {
@@ -449,20 +318,6 @@ const startMusicPlay = function() {
   if (command === "ping") {
     message.channel.sendMessage(`Response time: \`${Date.now() - message.createdTimestamp} ms\``);
   } else
-
-  /*if (command === "cmdinfo") {
-	if (args = "test") {
-		message.channel.sendMessage('bloot');
-	} else
-
-	if (args = "inviteme") {
-		message.channel.sendMessage('Showing description of -inviteme');
-		message.channel.sendMessage('Prints link to add Tink to your server');
-	} else {
-		message.reply('I am not sure what command you are referring to. Type `!help` for a list of commands.');
-	}
-
-  } else*/
 
   if (command === "stats") {
 	  message.channel.sendMessage('Current stats for Tink:\nCurrent servers: ' + client.guilds.size + '\nUsers: ' + client.users.size + `\nCommands dealt with since last restart: ${totalCommands} \nI have been running since ${restartStamp}.`);
@@ -556,25 +411,6 @@ const startMusicPlay = function() {
    }
   } else
 
-  /*if (command === "unban") {
-   if (message.member.hasPermission("BAN_MEMBERS")){
-	//let unbannee = message.mentions.user.first();
-	//message.channel.sendMessage(message.guild.fetchBans());
-	var banList =
-	message.channel.sendMessage(`${args} has been unbanned.`);
-	message.guild.unban(args)
-	//message.guild.unban('248520350382424065')
-	.then(user => console.log(`${message.author} unbanned ${args}.`))
-	//.catch(console.error);
-
-   } else {
-	   message.reply('you do not have permission to unban members.');
-	   console.log(`${message.author} attempted to unban ${args}.`);
-   }
-
-
-  } else*/
-
   if (command === "ban") {
    let bannee = message.guild.member(message.mentions.users.first());
    let banMessage = args.slice(1).join(" ");
@@ -655,7 +491,7 @@ const startMusicPlay = function() {
 	var leet = str.replace(/i/g, "1");
 	leet = leet.replace(/o/g, "0");
 	leet = leet.replace(/a/g, "4");
-  leet = leet.replace(/g/g, "q");
+	leet = leet.replace(/g/g, "q");
 	leet = leet.replace(/e/g, "3");
 	leet = leet.replace(/s/g, "5");
 	leet = leet.replace(/t/g, "7");
@@ -671,12 +507,6 @@ const startMusicPlay = function() {
 		message.channel.sendMessage(`Usage of !leet:\n!leet <message>`);
 	}
   } else
-
-  /*if (command === "prefix") {
-	prefix[message.guild.id] = args.join(' ');
-	message.channel.sendMessage(`The new prefix is ${prefix[message.guild.id]}.`);
-  } else
-*/
 
   if (command === "lol") {
 	  let lolRandom = Math.floor(Math.random() * 10);
@@ -719,43 +549,22 @@ const startMusicPlay = function() {
 	  if (lolRandom === 9) {
 		  message.channel.sendMessage(`It smells like someone sneezed!`);
 	  }	else {
-		  //message.channel.sendMessage(lolRandom);
 	  }
-	  //console.log(`Output: Lol ${lolRandom});
   } else
 
   if (command === "help") {
-	//message.author.sendMessage(`Help menu for Tink, developed by ThePoptartCrpr.\n\nCurrent version: ${version}\n\nFor a moderation log of all punishments that users issue through Tink, simply create a text channel called "mod-logs". Tink will then log everything in that channel.\n\n[argument] denotes a required argument.\n<argument> denotes an optional argument.\n\nCommands:\n` + '```test\nUtility commands:\n\n!help | Sends help documentation, which you are reading.\n!inviteme | Prints invite link so that you can add Tink to your server.\n!ping | Pong!\n!say <message> | prints whatever you write.\n!lmgtfy <query> | prints a custom lmgtfy.com link based on your query.\n!google <query> | prints a custom lmgtfy.com link based on your query.\n!stats | Prints current stats for Tink.\n!serverinfo | Prints info on the guild you are in.\n!guildinfo | Prints info on the guild you are in.\n!userinfo [@usertag] | Prints information on the user you tagged. If not specified, will print information about you.\n!list | Lists all the members of the guild you are in and prints a count of the members.\n!nickname <nickname> | Changes your nickname to whatever you specify.\n\nFun commands:\n\n!8ball [question] | Ask the great 8ball a question!\n!leet <message> | Converts whatever you type to leetspeak.\n!lol | Prints a random funny message.\n\nModeration commands:\n\n!kick <@usertag> <reason> | Kicks the specified user with the specified reason.\n!warn <@usertag> <reason> | Warns the specified user with the specified reason.\n!ban <usertag> <reason> | Bans the specified user with the specified reason.\n!addrole <@usertag> <role> | Adds the specified role to the specified user.```' + `\nTo add me to your server, click here: http://bit.ly/2funTwG\n\nGot a question? Want the latest announcements? Join our support server here: https://discord.gg/ZGS9P9G`);
-	//message.author.sendMessage('Help menu for Tink, developed by ThePoptartCrpr.\nFull list of commands:\n```-help, -ping, -stats, -say, -inviteme, -cmdinfo```\nFor more info on a command, type -cmdinfo <command>.\nCMDINFO IS A WORK IN PROGRESS! IT IS COMING SOON!' + `\nCurrent version: ${version}` + '\nGot a question? Want the latest announcements? Join our support server here: https://discord.gg/ZGS9P9G');
   const embed = new Discord.RichEmbed()
   .setTitle(`Tink ${version}`)
   .setAuthor('')
-  /*
-   * Alternatively, use '#00AE86', [0, 174, 134] or an integer number.
-   */
-  //.setColor(0x00AE86)
   .setColor(0x6E6E6E)
   .setDescription('For a moderation log of all punishments that users issue through Tink, simply create a text channel called "mod-logs". Tink will then log everything in that channel.')
-  .setFooter(/*'To add me to your server, click here: http://bit.ly/2funTwG \n\nGot a question? Want the latest announcements? Join our support server here: https://discord.gg/ZGS9P9G'*/'Developed by ThePoptartCrpr')
-  // .setImage('https://goo.gl/D3uKk2')
-  // .setThumbnail('https://goo.gl/lhc6ke')
-  /*
-   * Takes a Date object, defaults to current date.
-   */
+  .setFooter('Developed by ThePoptartCrpr')
   .setTimestamp()
-  //.setURL('http://tink-bot.weebly.com/')
   .addField('Argument help:', '<argument> denotes a required argument.\n[argument] denotes an optional argument.\n@usertag denotes a tag to a member.')
-  /*
-   * Inline fields may not display as inline if the thumbnail and/or image is too big.
-   */
   .addField('Commands:', 'For descriptions of Tink\'s commands, check out our documentation:\nhttp://tink-bot.weebly.com/commands-documentation.html', true)
-  /*
-   * Blank field, useful to create some space.
-   */
   .addField('Utility commands: ', '```t\n!help\n!inviteme\n!ping\n!say <message>\n!lmgtfy <query>\n!google <query>\n!stats\n!serverinfo\n!guildinfo\n!userinfo [@usertag]\n!list\n!nickname <nickname>```')
   .addField('Fun commands:', '```t\n!8ball <question>\n!leet <message>\n!lol```')
   .addField('Moderation commands:', '```t\n!kick <@usertag> <reason>\n!warn <@usertag> <reason> \n!ban <@usertag> <reason>\n!addrole <@usertag> <reason>```')
-  //.addField('\u200b', '\u200b', true)
   .addField('To add me to your server, click here: http://bit.ly/2funTwG', '\n\n\nGot a question? Want the latest announcements? Join our support server here: https://discord.gg/ZGS9P9G', true);
 
 message.author.sendEmbed(
@@ -764,7 +573,6 @@ message.author.sendEmbed(
   { disableEveryone: true }, { split: true}
 );
 	message.reply('you have been sent help documentation.');
-	//console.log('Sent help documentation.');
   } else {
 	  message.reply('I am not sure what you meant by that. Try `!help` for a list of commands.');
   }
