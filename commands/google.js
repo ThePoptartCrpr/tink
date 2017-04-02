@@ -4,7 +4,25 @@ exports.run = (client, message) => {
 		if (str === "") {
 			message.channel.sendMessage(`Usage of !google:\n!google <query>`);
 		} else {
-		var lmgtfy = str.replace(/ /g, "+");
+    var lmgtfy = str.replace(/%/g, "%25");
+		lmgtfy = lmgtfy.replace(/@/g, "%40");
+    lmgtfy = lmgtfy.replace(/#/g, "%23");
+    lmgtfy = lmgtfy.replace(/\$/g, "%24");
+    lmgtfy = lmgtfy.replace(/\^/g, "%5E");
+    lmgtfy = lmgtfy.replace(/&/g, "%26");
+    lmgtfy = lmgtfy.replace(/=/g, "%3D");
+    lmgtfy = lmgtfy.replace(/\+/g, "%2B");
+    lmgtfy = lmgtfy.replace(/`/g, "%60");
+    lmgtfy = lmgtfy.replace(/'/g, "%27");
+    lmgtfy = lmgtfy.replace(/"/g, "%22");
+    lmgtfy = lmgtfy.replace(/;/g, "%3B");
+    lmgtfy = lmgtfy.replace(/:/g, "%3A");
+    lmgtfy = lmgtfy.replace(/,/g, "%2C");
+    lmgtfy = lmgtfy.replace(/</g, "%3C");
+    lmgtfy = lmgtfy.replace(/>/g, "%3E");
+    lmgtfy = lmgtfy.replace(/\//g, "%2F");
+    lmgtfy = lmgtfy.replace(/\?/g, "%3F");
+    lmgtfy = lmgtfy.replace(/ /g, "+");
 		message.channel.sendMessage(`http://lmgtfy.com/?q=${lmgtfy}`);
 		}
 	} catch(e) {
