@@ -1,23 +1,7 @@
+const responses = ['Of course.', 'Yes, it is certain.', 'Definitely not.', 'Perhaps.', 'Maybe, maybe not.', 'No.'];
+
 exports.run = (client, message) => {
-  let ballRandom = Math.floor(Math.random() * 6);
-	if (ballRandom === 0) {
-		message.channel.sendMessage('Of course.');
-	} else
-	if (ballRandom === 1) {
-		message.channel.sendMessage('Yes, it is certain.');
-	} else
-	if (ballRandom === 2) {
-		message.channel.sendMessage('Definitely not.');
-	} else
-	if (ballRandom === 3) {
-		message.channel.sendMessage('Perhaps.');
-	}
-	if (ballRandom === 4) {
-		message.channel.sendMessage('Maybe, maybe not.');
-	} else
-	if (ballRandom === 5) {
-		message.channel.sendMessage('No.');
-	}
+  message.channel.sendMessage(`${responses[Math.floor(Math.random() * responses.length)]}`).catch(err => console.log(err.stack));
 };
 
 exports.conf = {
