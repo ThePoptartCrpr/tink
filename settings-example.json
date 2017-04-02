@@ -1,0 +1,8 @@
+{
+	"ownerid": "Your user ID here",
+	"modrolename": "Moderator",
+	"adminrolename": "Admin",
+	"prefix": "+",
+	"token": "Your bot token here",
+	"version": "1.2.2"
+}
