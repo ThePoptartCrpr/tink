@@ -98,8 +98,8 @@ const pointcount = function() {
   }
 
   if(message.channel.type == 'dm') {
-    console.log(`${new Date().toLocaleTimeString()}: "!${command} ${result}" was used by ${message.author.username}, in a direct message.`);
+    console.log(`${new Date().toLocaleTimeString()}: "+${command} ${result}" was used by ${message.author.username}, in a direct message.`);
   } else {
-    console.log(`${new Date().toLocaleTimeString()}: "!${command} ${result}" was used by ${message.author.username}, in server ${message.guild.name}.`);
+    console.log(`${new Date().toLocaleTimeString()}: "+${command} ${result}" was used by ${message.author.username}, in server ${message.guild.name}.`);
   }
 };
