@@ -4,7 +4,6 @@ exports.run = (client, message, params) => {
   if (!params[0]) {
     const commandNames = Array.from(client.commands.keys());
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
-    message.channel.sendMessage(`Tink ${settings.version}`);
     message.channel.sendCode('asciidoc', `= Command List =\n\n[Use ${settings.prefix}help <commandname> for details]\n\n${client.commands.map(c => `${settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}`).join('\n')}`);
     message.channel.sendMessage('To add me to your server, click here: http://bit.ly/2funTwG\n\nGot a question? Want the latest announcements? Join our support server here: https://discord.gg/ZGS9P9G')
     /*const embed = new Discord.RichEmbed()
