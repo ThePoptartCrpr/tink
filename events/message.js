@@ -90,7 +90,8 @@ const pointcount = function() {
   } else if (client.aliases.has(command)) {
     cmd = client.commands.get(client.aliases.get(command));
   } else {
-    message.channel.sendMessage(`Unknown command. Try \`${settings.prefix}help\` for a list of commands.`);
+    // if(message.guild.id === 110373943822540800) return;
+    // message.channel.sendMessage(`Unknown command. Try \`${settings.prefix}help\` for a list of commands.`);
   }
   if (cmd) {
     if (perms < cmd.conf.permLevel) return message.channel.sendMessage('You do not have permission to run that command.');
