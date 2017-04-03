@@ -15,5 +15,5 @@ exports.conf = {
 exports.help = {
   name: 'points',
   description: 'Displays your current points.',
-  usage: '!points'
+  usage: '+points'
 };

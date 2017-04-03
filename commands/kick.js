@@ -72,5 +72,5 @@ exports.conf = {
 exports.help = {
   name: 'kick',
   description: 'Kicks the specified user.',
-  usage: '!kick <@usertag> <reason>'
+  usage: '+kick <@usertag> <reason>'
 };

@@ -44,5 +44,5 @@ exports.conf = {
 exports.help = {
   name: 'google',
   description: 'Create a lmgtfy.com link based on your query.',
-  usage: '!google <message>'
+  usage: '+google <message>'
 };

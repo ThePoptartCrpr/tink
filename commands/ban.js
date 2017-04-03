@@ -72,5 +72,5 @@ exports.conf = {
 exports.help = {
   name: 'ban',
   description: 'Bans the specified user.',
-  usage: '!ban <usertag> <reason>'
+  usage: '+ban <usertag> <reason>'
 };

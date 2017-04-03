@@ -91,5 +91,5 @@ exports.conf = {
 exports.help = {
   name: 'warn',
   description: 'Warns the specified user.',
-  usage: '!warn <@usertag> <reason>'
+  usage: '+warn <@usertag> <reason>'
 };

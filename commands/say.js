@@ -12,5 +12,5 @@ exports.conf = {
 exports.help = {
   name: 'say',
   description: 'Prints your message.',
-  usage: '!say <message>'
+  usage: '+say <message>'
 };

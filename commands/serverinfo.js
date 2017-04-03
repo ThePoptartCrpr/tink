@@ -12,5 +12,5 @@ exports.conf = {
 exports.help = {
   name: 'serverinfo',
   description: 'Displays statistics of the guild.',
-  usage: '!stats'
+  usage: '+stats'
 };

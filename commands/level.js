@@ -15,5 +15,5 @@ exports.conf = {
 exports.help = {
   name: 'level',
   description: 'Displays your current level.',
-  usage: 'level'
+  usage: '+level'
 };

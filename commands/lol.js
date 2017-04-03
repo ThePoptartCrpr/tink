@@ -14,5 +14,5 @@ exports.conf = {
 exports.help = {
   name: 'lol',
   description: 'Prints a random funny message.',
-  usage: '!lol'
+  usage: '+lol'
 };

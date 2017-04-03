@@ -24,7 +24,7 @@ exports.run = (client, message, params) => {
     let command = params[0];
     if (client.commands.has(command)) {
       command = client.commands.get(command);
-      message.channel.sendCode('asciidoc', `= ${command.help.name} = \n${command.help.description}\nUsage:${command.help.usage}`);
+      message.channel.sendCode('asciidoc', `= ${command.help.name} = \n${command.help.description}\nUsage: ${command.help.usage}`);
     }
   }
 };
@@ -39,5 +39,5 @@ exports.conf = {
 exports.help = {
   name: 'help',
   description: 'Displays all the available commands for your permission level.',
-  usage: 'help [command]'
+  usage: '+help [command]'
 };

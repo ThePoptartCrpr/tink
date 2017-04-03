@@ -22,5 +22,5 @@ exports.conf = {
 exports.help = {
   name: 'nickname',
   description: 'Changes nicknames.',
-  usage: '!nickname [@usertag]'
+  usage: '+nickname [@usertag]'
 };

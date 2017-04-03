@@ -12,5 +12,5 @@ exports.conf = {
 exports.help = {
   name: 'stats',
   description: 'Displays statistics for Tink.',
-  usage: '!stats'
+  usage: '+stats'
 };

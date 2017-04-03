@@ -12,5 +12,5 @@ exports.conf = {
 exports.help = {
   name: 'inviteme',
   description: 'Invite me to your server.',
-  usage: '!inviteme'
+  usage: '+inviteme'
 };

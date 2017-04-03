@@ -22,5 +22,5 @@ exports.conf = {
 exports.help = {
   name: 'prefix',
   description: 'Changes the prefix for your guild.',
-  usage: '!prefix <prefix>'
+  usage: '+prefix <prefix>'
 };

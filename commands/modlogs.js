@@ -90,5 +90,5 @@ exports.conf = {
 exports.help = {
   name: 'modlogs',
   description: 'Set the mod logs location.',
-  usage: '!modlogs location <location> | !modlogs toggle | !modlogs values'
+  usage: '+modlogs location <location> | !modlogs toggle | !modlogs values'
 };

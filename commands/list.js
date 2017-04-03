@@ -13,5 +13,5 @@ exports.conf = {
 exports.help = {
   name: 'list',
   description: 'Lists all members of your guild.',
-  usage: '!list'
+  usage: '+list'
 };

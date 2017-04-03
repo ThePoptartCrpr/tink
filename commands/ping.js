@@ -19,5 +19,5 @@ exports.conf = {
 exports.help = {
   name: 'ping',
   description: 'Calculates response time.',
-  usage: '!ping'
+  usage: '+ping'
 };

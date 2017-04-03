@@ -17,5 +17,5 @@ exports.conf = {
 exports.help = {
   name: 'userinfo',
   description: 'Prints information about the user you tagged.',
-  usage: '!userinfo [@usertag]'
+  usage: '+userinfo [@usertag]'
 };

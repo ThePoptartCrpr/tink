@@ -28,5 +28,5 @@ exports.conf = {
 exports.help = {
   name: 'leet',
   description: 'Converts your message to leetspeak.',
-  usage: '!leet <message>'
+  usage: '+leet <message>'
 };

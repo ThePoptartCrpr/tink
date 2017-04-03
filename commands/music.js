@@ -135,5 +135,5 @@ exports.conf = {
 exports.help = {
   name: 'music',
   description: 'Play music through a voice channel.',
-  usage: '!music <add | play | join | queue | pause | resume | skip | volume+ | volume->'
+  usage: '+music <add <url> | play | join | queue | pause | resume | skip | volume+ | volume->'
 };
