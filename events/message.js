@@ -57,6 +57,7 @@ const pointcount = function() {
     if (curLevel > row.level) {
       row.level = curLevel;
       sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
+      if(message.guild.id === "110373943822540800") return;
       message.channel.sendMessage(`:up: ${message.author.username} is now level **${curLevel}**!`);
     }
     sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
@@ -90,8 +91,8 @@ const pointcount = function() {
   } else if (client.aliases.has(command)) {
     cmd = client.commands.get(client.aliases.get(command));
   } else {
-    // if(message.guild.id === 110373943822540800) return;
-    // message.channel.sendMessage(`Unknown command. Try \`${settings.prefix}help\` for a list of commands.`);
+    if(message.guild.id === "110373943822540800") return;
+    message.channel.sendMessage(`Unknown command. Try \`${settings.prefix}help\` for a list of commands.`);
   }
   if (cmd) {
     if (perms < cmd.conf.permLevel) return message.channel.sendMessage('You do not have permission to run that command.');
