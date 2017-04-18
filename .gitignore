@@ -27,6 +27,7 @@ build/Release
 settings.json
 config.json
 *.sqlite
+*.sqlite-journal
 
 # Dependency directories
 node_modules
