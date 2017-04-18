@@ -2,7 +2,7 @@ const figlet = require('figlet');
 exports.run = (client, message, [...text]) => {
   figlet(text.join(" "), (err, data) => {
     if (err) return console.log(err);
-    return message.channel.sendCode("", data).catch(e => console.log(e));
+    return message.channel.sendCode("", data).catch(e => console.log('Error!'));
 });
 };
 
