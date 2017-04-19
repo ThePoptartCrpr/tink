@@ -70,7 +70,7 @@ const pointcount = function() {
 });
 };
 
-  pointcount();
+  // pointcount();
   // console.log(message.client.prefix[message.guild.id]);
   /*setTimeout(function() {
     console.log(message.client.prefix[message.guild.id]);
