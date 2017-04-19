@@ -40,8 +40,6 @@ let discordBotsListUser = config.discordBotsListUser;
 
   const updateDiscordBotsList = function(totalGuild) {
     if (botsDiscordPwToken && botsDiscordPwUser) {
-      // console.log(`Updating.`)
-      // console.log(`Tink is on ${totalGuild} servers.`);
       console.log('Posting stats to discordbots.org.');
       const requestBody = {
         method: 'POST',

@@ -30,10 +30,6 @@ exports.run = (client, message) => {
 	}
 };
 
-/*exports.run = (client, message) => {
-  message.channel.sendMessage(`Response time: \`${Date.now() - message.createdTimestamp} ms\``);
-};*/
-
 exports.conf = {
   enabled: true,
   guildOnly: false,
