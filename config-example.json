@@ -1,7 +1,9 @@
 {
-    "prefix" : "+",
+  "prefix" : "+",
 	"token" : "Your bot token here",
 	"passes" : 1,
 	"botsDiscordPwToken" : "Your bots.discord.pw token here",
-	"botsDiscordPwUser" : "Your bots.discord.pw user here"
+	"botsDiscordPwUser" : "Your bots.discord.pw ID here",
+  "discordBotsListToken" : "Your discordbots.org token here",
+  "discordBotsListUser" : "Your discordbots.org ID here"
 }
