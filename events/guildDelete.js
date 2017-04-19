@@ -22,8 +22,6 @@ module.exports = guild => {
             'Content-Type': 'application/json',
           },
           body: {
-            // shard_id: parseInt(this.shardId, 10),
-            // shard_count: parseInt(this.shardCount, 10),
             server_count: parseInt(totalGuild, 10),
           },
           json: true,
@@ -38,8 +36,6 @@ module.exports = guild => {
 
     const updateDiscordBotsList = function(totalGuild) {
       if (botsDiscordPwToken && botsDiscordPwUser) {
-        // console.log(`Updating.`)
-        // console.log(`Tink is on ${totalGuild} servers.`);
         console.log('Posting stats to discordbots.org.');
         const requestBody = {
           method: 'POST',
@@ -49,8 +45,6 @@ module.exports = guild => {
             'Content-Type': 'application/json',
           },
           body: {
-            // shard_id: parseInt(this.shardId, 10),
-            // shard_count: parseInt(this.shardCount, 10),
             server_count: parseInt(totalGuild, 10),
           },
           json: true,
