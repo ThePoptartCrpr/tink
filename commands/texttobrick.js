@@ -1,5 +1,5 @@
 exports.run = (client, message, [...text]) => {
-  text = text.join(" ").replace(/ /g, "   ").replace(/[a-z]/g, ":regional_indicator_$&:");
+  text = text.join(" ").toLowerCase().replace(/ /g, "   ").replace(/[a-z]/g, ":regional_indicator_$&:");
   message.channel.sendMessage(text);
 };
 
